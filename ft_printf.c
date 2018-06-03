@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 18:41:04 by acourtin          #+#    #+#             */
-/*   Updated: 2018/06/03 17:45:11 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/03 17:48:40 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,19 @@ static void		check_parameter(char c, va_list ap, int *i)
 	*i += 1;
 }
 
-void			ft_printf(char *str, ...)
+void			ft_printf(const char *format, ...)
 {
 	int			i;
 	va_list		ap;
 
-	va_start(ap, str);
+	va_start(ap, format);
 	i = -1;
-	while (str[++i])
+	while (format[++i])
 	{
-		if (str[i] == '%')
-			check_parameter(str[i + 1], ap, &i);
+		if (format[i] == '%')
+			check_parameter(format[i + 1], ap, &i);
 		else
-			ft_putchar(str[i]);
+			ft_putchar(format[i]);
 	}
 	va_end(ap);
 }
