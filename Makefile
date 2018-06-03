@@ -8,7 +8,7 @@ POBJ = $(addprefix obj/,$(OBJ))
 all : $(NAME)
 
 $(NAME) : submake $(POBJ)
-	@$(CC) $(POBJ) -Llibft -lft -o $(NAME)
+	@$(CC) $(POBJ) -Ilibft -I. -Llibft -lft -o $(NAME)
 	@printf "\r\033[K"
 	@echo "\033[32m/------------------------------------\ \\033[0m"
 	@echo "\033[32m|------------- $(NAME) crée -------| \\033[0m"
