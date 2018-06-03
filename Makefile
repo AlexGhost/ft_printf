@@ -1,33 +1,42 @@
-NAME = ft_printf
-CFLAG = -Wall -Werror -Wextra
-CC = gcc $(CFLAG)
-SRC = main.c ft_printf.c
-OBJ = $(SRC:.c=.o)
-POBJ = $(addprefix obj/,$(OBJ))
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/06/03 17:57:46 by acourtin          #+#    #+#              #
+#    Updated: 2018/06/03 18:01:27 by acourtin         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-all : $(NAME)
+NAME =  libftprintf.a
+CC = gcc
+CCFLAGS = -Wall -Wextra -Werror
+SRC.C = ft_printf.c
 
-$(NAME) : submake $(POBJ)
-	@$(CC) $(POBJ) -Ilibft -I. -Llibft -lft -o $(NAME)
+SRC.O 		= 	$(SRC.C:.c=.o)
+
+all: $(NAME)
+
+$(NAME): $(SRC.O)
+	@ar rc $(NAME) $(SRC.O)
+	@ranlib $(NAME)
 	@printf "\r\033[K"
-	@echo "\033[32m/------------------------------------\ \\033[0m"
-	@echo "\033[32m|------------- $(NAME) crée -------| \\033[0m"
-	@echo "\033[32m\------------------------------------/ \\033[0m"
+	@echo "\033[33m/------------------------------------\ \\033[0m"
+	@echo "\033[33m|-------- $(NAME) crée --------| \\033[0m"
+	@echo "\033[33m\------------------------------------/ \\033[0m"
 
-submake :
-	@$(MAKE) -C libft/
+%.o: %.c
+	@$(CC) $(CCFLAGS) -o $@ -c $< -Ilibft
+	@echo "\033[36m[\t\033[0m$<\033[36m\t] \tOK\033[0m"
 
-obj/%.o: %.c
-	@printf "\r\033[K""\033[36m - Compilation de \033[0m$<\033[0m"
-	@mkdir -p obj
-	@$(CC) -o $@ -c $<
+clean:
+	@rm -rf $(SRC.O)
+	@echo "\033[31mSuppression - objs\033[0m"
 
-clean :
-	@$(MAKE) fclean -C libft/
-	@rm -rf obj
-
-fclean : clean
-	@rm -f $(NAME)
+fclean: clean
+	@rm -rf $(NAME)
 	@echo "\033[31mSuppression - $(NAME)\033[0m"
 
-re : fclean all
+re: fclean $(NAME)
