@@ -6,14 +6,14 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 18:41:04 by acourtin          #+#    #+#             */
-/*   Updated: 2018/06/03 17:48:40 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/03 18:36:04 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "ft_printf.h"
 
-static void		check_parameter(char c, va_list ap, int *i)
+static int		check_parameter(char c, va_list ap, int *i)
 {
 	if (c == 'i' || c == 'd')
 		ft_putnbr(va_arg(ap, int));
@@ -23,7 +23,13 @@ static void		check_parameter(char c, va_list ap, int *i)
 		ft_putchar(va_arg(ap, int));
 	else if (c == '%')
 		ft_putchar('%');
+	else
+	{
+		ft_putendl("Invalid parameter");
+		return (0);
+	}
 	*i += 1;
+	return (1);
 }
 
 void			ft_printf(const char *format, ...)
@@ -36,7 +42,10 @@ void			ft_printf(const char *format, ...)
 	while (format[++i])
 	{
 		if (format[i] == '%')
-			check_parameter(format[i + 1], ap, &i);
+		{
+			if (!check_parameter(format[i + 1], ap, &i))
+				exit(0);
+		}
 		else
 			ft_putchar(format[i]);
 	}
