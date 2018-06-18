@@ -6,7 +6,7 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 18:41:04 by acourtin          #+#    #+#             */
-/*   Updated: 2018/06/03 18:36:04 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/18 16:55:00 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 static int		check_parameter(char c, va_list ap, int *i)
 {
-	if (c == 'i' || c == 'd')
+	if (c == 'i' || c == 'd' || c == 'D')
 		ft_putnbr(va_arg(ap, int));
-	else if (c == 's')
+	else if (c == 's' || c == 'S')
 		ft_putstr(va_arg(ap, char*));
 	else if (c == 'c')
 		ft_putchar(va_arg(ap, int));
