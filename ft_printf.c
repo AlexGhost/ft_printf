@@ -6,11 +6,10 @@
 /*   By: acourtin <acourtin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/25 18:41:04 by acourtin          #+#    #+#             */
-/*   Updated: 2018/06/18 16:55:00 by acourtin         ###   ########.fr       */
+/*   Updated: 2018/06/18 16:58:02 by acourtin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
 #include "ft_printf.h"
 
 static int		check_parameter(char c, va_list ap, int *i)
